@@ -420,14 +420,15 @@ span#time{
 .musicPlayerBar {
     background-color:#fff94d;
     margin-top:10px;
+    margin-bottom:19px;
     padding:3px;
-    padding-left:100px;
+    padding-left:50px;
 }
 
 
 .musicControllerContainer{
     max-width:40%;
-    min-width:400px;
+    min-width:420px;
     background-color:yellow;
     margin-left:20px;
     margin: 0 auto;
@@ -440,20 +441,29 @@ span#time{
 }
 
 .musicButtonsContainer{
+    display:inline-block;
+    float:left;
 }
 
 .audioButton {
     font-size:12px;
-    width:100px;
+    width:80px;
+    height:50px;
     margin:3px;
+    padding:3px;
+}
+
+.playButton {
+    font-size:20px;
 }
 
 .musicVolumeContainer{
-    margin:20px;
+    margin:10px;
     display:inline-block;
 }
 
-.volumeSlider { 
+.volumeSlider {
+    display:inline-block;
 }
 
 
@@ -529,7 +539,9 @@ span#time{
 .musicPlayerRemainingTimeDisplay {
 }
 
-
+.nowPlayingData {
+    background-color:red;
+}
 
 
 

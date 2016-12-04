@@ -7,6 +7,11 @@ angular.module('browse',[])
 	  transclude: true,
 	  controllerAs: "bc",
 	  link: function(scope, element, attrs){
+	  	//simply start play method from nothing
+	  	nowPlayingList.queuedAlbum = browseTestData.artists[0].albums[0]
+			nowPlayingList.queuedArtist = browseTestData.artists[0]
+			nowPlayingList.queuedTrack = browseTestData.artists[0].albums[0].tracks[0]
+
 
 	  },
 	  controller: function(ngAudio){

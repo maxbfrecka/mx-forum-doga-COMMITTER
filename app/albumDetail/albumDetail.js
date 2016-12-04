@@ -32,6 +32,12 @@ angular.module('albumDetail',[])
 
 			console.log(nowPlayingList.nowPlayingChange)
 
+			//for play button without clicking track
+			nowPlayingList.queuedAlbum = adc.currentAlbum
+			nowPlayingList.queuedArtist = adc.currentArtist
+			nowPlayingList.queuedTrack = adc.currentAlbum.tracks[0]
+
+
 			adc.playTrack = function(track, album, artist){
 				nowPlayingList.nowPlayingTrack = track
 				nowPlayingList.nowPlayingAlbum = album
