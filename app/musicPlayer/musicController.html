@@ -1,0 +1,58 @@
+<div class="musicControllerContainer">
+
+
+	<div class="musicButtonsContainer">
+		<button class="audioButton playButton" ng-click="nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()">Pause</button>
+
+		<button class="audioButton stopButton" ng-click="nowPlaying.restart()">Stop</button>
+
+	</div>
+
+	<div class="musicVolumeContainer">
+		<input class="volumeSlider" type=range min=0 max=1 step=0.01 ng-model="nowPlaying.volume">
+	</div>
+
+
+
+</div>
+
+
+
+
+<div class="musicPlayerContainer">
+
+		<div class="musicPlayerArtIconContainer">
+			<img class="musicPlayerAlbumArtIcon" src="{{albumCover}}">
+		</div>
+
+		<div class="musicPlayerTimeContainer">
+
+			<div class="timeDisplayContainerCurrent">	
+				<div class="musicPlayerCurrentTimeDisplay">{{nowPlaying.currentTime | trackTime}}</div>
+			</div>
+
+			
+			<div class="timeRangeContainer">
+				<input class="musicPlayerTimeRange" type="range" step="1" max="{{nowPlaying.duration}}" ng-model="nowPlaying.currentTime">
+			</div>
+			
+			<div class="timeDisplayContainerRemaining">
+				<div class="musicPlayerRemainingTimeDisplay">{{nowPlaying.remaining | trackTime}}</div>
+			</div>
+			
+		</div>
+</div>
+
+<div class="nowPlayingData">
+<span>{{trackTitle}}</span>
+<span>{{albumTitle}}</span>
+<span>{{artistName}}</span>
+</div>
+
+
+
+
+
+
+
+</div>
