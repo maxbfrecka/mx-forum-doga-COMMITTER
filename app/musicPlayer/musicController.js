@@ -22,48 +22,64 @@ angular.module('musicController',[])
 
 	  	//changes songs when they finish
 	  	//makes sure song is playing
-	  	scope.$watch(function(){return scope.nowPlaying.currentTime},
-	  		function(){
-	  			scope.nowPlaying.volume = scope.currentVolume
-	  			//this nowPlayingTrackNumber references the next track... actually, adding 1 will return object for current
-	  			//checks if the currentTime is at the end of the song
-	  			if (scope.nowPlaying.remaining==0){
-	  				//will then check if any other songs on the album...
-	  				//if there are, then it will load the next song
-	  				//checks if track which just finished is the same track number as the track length
-	  				//if it is not, there are more tracks, so does operation
-	  				if (nowPlayingList.nowPlayingAlbumLength != nowPlayingList.nowPlayingTrackNumber){
-		  				
-		  				nowPlayingList.nowPlayingChange = !nowPlayingList.nowPlayingChange
-		  				nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[nowPlayingList.nowPlayingTrackNumber]
-		  				nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
+	  	/*scope.$watch(function(){return scope.nowPlaying}, 
+	  		function(){*/
 
-		  				
-		  			} else {
-		  				//when album ends, loads in the first song again and stops audio
-		  				/*nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[0]
-		  				nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
-		  				scope.trackTitle=nowPlayingList.nowPlayingTrack.trackTitle
-		  				scope.nowPlaying = ngAudio.load(nowPlayingList.nowPlayingTrack.sourceFile)
-		  				scope.nowPlaying.restart()*/
+			  	scope.$watch(function(){return scope.nowPlaying.currentTime},
+			  		function(){
+			  			if ((scope.nowPlaying!=undefined) && (scope.nowPlaying!=null)){
+			  				scope.nowPlaying.volume = scope.currentVolume
+			  			}
+			  			
+			  			//this nowPlayingTrackNumber references the next track... actually, adding 1 will return object for current
+			  			//checks if the currentTime is at the end of the song
+			  			if (scope.nowPlaying.remaining==0){
+			  				console.log('changing song...')
+			  				console.log(nowPlayingList.nowPlayingTrackNumber)
+			  				console.log(nowPlayingList.nowPlayingAlbum)
+			  				console.log(nowPlayingList.nowPlayingAlbumTrackLength)
+			  				//will then check if any other songs on the album...
+			  				//if there are, then it will load the next song
+			  				//checks if track which just finished is the same track number as the track length
+			  				//if it is not, there are more tracks, so does operation
+			  				if (nowPlayingList.nowPlayingAlbumLength != nowPlayingList.nowPlayingTrackNumber){
+			  					console.log('next song!')
+				  				
+				  				nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[nowPlayingList.nowPlayingTrackNumber]
+				  				nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
+				  				nowPlayingList.nowPlayingChange = !nowPlayingList.nowPlayingChange
 
-		  				//or preferably, clears player and data
-		  				scope.nowPlaying.restart()
-		  				nowPlayingList.nowPlayingTrack = null
-		  				//set a nowPlayingTrack on scope to assist queuedTrack function for player
-		  				scope.nowPlayingTrack = nowPlayingList.nowPlayingTrack
-							nowPlayingList.nowPlayingAlbum = null
-							nowPlayingList.nowPlayingArtist= null
-							scope.trackTitle=null
-				  		scope.albumTitle=null
-				  		scope.artistName=null
-				  		scope.albumCover =null
-				  		scope.nowPlaying = ngAudio.load('')
-	  				}
-	  			}
-	  		}
-	  	)
+				  				
+				  			} else {
+				  				//when album ends, loads in the first song again and stops audio
+				  				/*nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[0]
+				  				nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
+				  				scope.trackTitle=nowPlayingList.nowPlayingTrack.trackTitle
+				  				scope.nowPlaying = ngAudio.load(nowPlayingList.nowPlayingTrack.sourceFile)
+				  				scope.nowPlaying.restart()*/
 
+				  				//or preferably, clears player and data
+				  				console.log('album ended')
+				  				scope.nowPlaying.restart()
+				  				nowPlayingList.nowPlayingTrack = null
+				  				//set a nowPlayingTrack on scope to assist queuedTrack function for player
+				  				scope.nowPlayingTrack = nowPlayingList.nowPlayingTrack
+									nowPlayingList.nowPlayingAlbum = null
+									nowPlayingList.nowPlayingArtist= null
+									scope.trackTitle=null
+						  		scope.albumTitle=null
+						  		scope.artistName=null
+						  		scope.albumCover =null
+						  		scope.nowPlaying = ngAudio.load('')
+			  				}
+			  			}
+			  		}
+			  	)
+/*		  	}
+	  	)*/
+
+
+	  	//SONG LOADER
 	  	//watch now playing track to change to load next song
 	  	scope.$watch(function(){return nowPlayingList.nowPlayingChange},
 	  		function(){
@@ -86,10 +102,13 @@ angular.module('musicController',[])
 			  			scope.albumTitle=nowPlayingList.nowPlayingAlbum.albumTitle
 			  			scope.artistName=nowPlayingList.nowPlayingArtist.artist
 			  			scope.albumCover = nowPlayingList.nowPlayingAlbum.albumCover
+
+
 			  			//for play button queue
 			  			scope.nowPlayingTrack = nowPlayingList.nowPlayingTrack
 			  			}
 			  		} else {
+			  			console.log(nowPlayingList.nowPlayingTrack)
 			  			scope.nowPlaying = ngAudio.load(nowPlayingList.nowPlayingTrack.sourceFile)
 			  			//wait until the above is defined...
 			  			scope.nowPlaying.play()
@@ -97,6 +116,7 @@ angular.module('musicController',[])
 			  			scope.albumTitle=nowPlayingList.nowPlayingAlbum.albumTitle
 			  			scope.artistName=nowPlayingList.nowPlayingArtist.artist
 			  			scope.albumCover = nowPlayingList.nowPlayingAlbum.albumCover
+
 			  			//for play button queue
 			  			scope.nowPlayingTrack = nowPlayingList.nowPlayingTrack
 			  		}
@@ -107,9 +127,15 @@ angular.module('musicController',[])
 	  	scope.playQueuedTrack = function(){
 	  		//sets current track to queued track, whatever it is
 	  		//also sets now playing artist, now playing album
+	  		console.log(nowPlayingList.queuedAlbum)
+	  		console.log(nowPlayingList.queuedTrack)
 	  		nowPlayingList.nowPlayingTrack = nowPlayingList.queuedTrack
 	  		nowPlayingList.nowPlayingAlbum = nowPlayingList.queuedAlbum
 	  		nowPlayingList.nowPlayingArtist = nowPlayingList.queuedArtist
+	  		//update track number for "next track" mechanism
+	  		nowPlayingList.nowPlayingTrackNumber = nowPlayingList.queuedTrack.trackNumber
+	  		nowPlayingList.nowPlayingAlbumTrackLength = nowPlayingList.nowPlayingAlbum.tracks.length
+	  		//send message to watcher
 	  		nowPlayingList.nowPlayingChange = !nowPlayingList.nowPlayingChange
 
 	  	}
@@ -136,6 +162,9 @@ angular.module('musicController',[])
 	  				console.log('to the previous track!')
 		  			nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[nowPlayingList.nowPlayingTrack.trackNumber-2]
 						scope.trackTitle=nowPlayingList.nowPlayingTrack.trackTitle
+						//update track number for "next track" mechanism
+			  		nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
+			  		nowPlayingList.nowPlayingAlbumTrackLength = nowPlayingList.nowPlayingAlbum.tracks.length
 						nowPlayingList.nowPlayingChange = !nowPlayingList.nowPlayingChange
 		  		}
 		  	}
@@ -168,7 +197,11 @@ angular.module('musicController',[])
 	  			console.log('to the next track!')
 	  			nowPlayingList.nowPlayingTrack = nowPlayingList.nowPlayingAlbum.tracks[nowPlayingList.nowPlayingTrack.trackNumber]
 					scope.trackTitle=nowPlayingList.nowPlayingTrack.trackTitle
+					//update track number for "next track" mechanism
+		  		nowPlayingList.nowPlayingTrackNumber = nowPlayingList.nowPlayingTrack.trackNumber
+		  		nowPlayingList.nowPlayingAlbumTrackLength = nowPlayingList.nowPlayingAlbum.tracks.length
 					nowPlayingList.nowPlayingChange = !nowPlayingList.nowPlayingChange
+
 	  		}
 
 	  	}

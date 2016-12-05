@@ -1,21 +1,25 @@
 angular.module('views', ['ngRoute'])
 	.config(['$routeProvider', function($routeProvider){
-	  $routeProvider.when('/', {
+	  $routeProvider.when('/catalog/', {
 	    templateUrl: 'views/main.html'
 	  })
-	  .when('/:ID', {
+	  .when('/library/', {
+	  	templateUrl: 'views/myLibrary.html',
+	  	controller: 'myLibraryController'
+	  })
+	  .when('/catalog/:ID', {
 	  	templateUrl: 'views/thread.html',
 	  	controller: 'threadController'
 	  })
-	  .when('/canvas/canvastest', {
+	  .when('/canvas/', {
 	  	templateUrl: 'views/canvastest.html',
 	  	controller: 'canvasController'
 	  })
-	  .when('/browse/browse', {
+	  .when('/browse/', {
 	  	templateUrl: 'views/browse.html',
 	  	controller: 'browseController'
 	  })
-	  .when('/:artist/:album', {
+	  .when('/music/:artist/:album', {
 	  	templateUrl: 'views/album.html',
 	  	controller: 'albumController'
 	  })
@@ -32,18 +36,16 @@ angular.module('views', ['ngRoute'])
 
 .controller('threadController', ['$scope', '$routeParams', 'testData', function($scope, $routeParams, testData){
 	$scope.threads = testData.threads;
-
 	console.log("route is" + $scope.threads[$routeParams.ID])
 }])
-
 .controller('canvasController', ['$scope', 'testData', 'threadData', function($scope, testData, threadData){
 	$scope.threads = testData.threads;
 	$scope.threadData = threadData.threads
 }])
-
-.controller('browseController', ['$scope', function($scope){
+.controller('browseController', ['$scope', 'browseTestData', function($scope, browseTestData){
 }])
-
-.controller('albumController', ['$scope', 'browseTestData', function($scope, $browseTestData){
+.controller('albumController', ['$scope', 'browseTestData', function($scope, browseTestData){
 	$scope.artists = browseTestData.artists
+}])
+.controller('myLibraryController', ['browseTestData', function($scope, browseTestData){
 }])

@@ -20,6 +20,7 @@ angular.module('albumDetail',[])
 	  	adc.currentArtistName = browseTestData.currentArtistName
 	  	adc.currentAlbumName = browseTestData.currentAlbumName
 	  	//search data for artist object
+	  	
 	  	browseTestData.currentArtist = adc.artists.filter(function(obj) {
     		return obj.artist.replace(/\s+/g, '-').toLowerCase() === adc.currentArtistName;
 			})[0];
@@ -61,7 +62,10 @@ angular.module('albumDetail',[])
 
 .filter('removeSpacesThenLowercase', function () {
   return function (text) {
-    var str = text.replace(/\s+/g, '-');
-    return str.toLowerCase();
-      };
+  	console.log(text)
+  	if (text){
+	    var str = text.replace(/\s+/g, '-')
+	    return str.toLowerCase()
+	    }
+	  }
 })

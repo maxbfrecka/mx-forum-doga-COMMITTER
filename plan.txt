@@ -134,7 +134,14 @@ MUSICCONTROLLER:
 
 
 
---now we want to make it to go to the next track when it finishes!
+
+
+
+-go to next track -> goes to next track
+-go to last track -> if currentTime >3 seconds, goes to last track
+-
+
+
 
 -now playing list... when click to play a song, adds to a list
 -when album is done playing, goes to next album page in list and plays...
@@ -150,23 +157,6 @@ IF LOGGED IN: can add to playlist, can add to library,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -add 1 to all array info to get proper track # rep
 -get album length and store in a variable inside factory
 -store current track # in a variable by searching array and returning the number that it's at any time the track changes
@@ -175,6 +165,48 @@ IF LOGGED IN: can add to playlist, can add to library,
 
 
 
+-click now playing album icon/or song data to go to album page
+-play random track from browse page (make 'noise' icon)
+-add album to library from browse page
+-column browser, library
+-spacebar controls the pause button
+-now playing icon next to currently playing song
+-list other albums by artist at bottom of album detail view
+
+
+
+-how to add songs to library......
+->click to add album (adds songs that aren't added)
+->click to add song (if already in, won't add)
+->gets the album object and artist object and adds all the tracks
+
+
+
+myLibrary:
+-loads the whole library
+-ng-repeat into a table... artists, albums, tracks at bottom
+-click artist to only show those albums, and then only show tracks in albums shown
+
+
+library = array of artists
+
+
+addToLibrary: takes that album, gets the artist name and adds to array as artistname, adds album to albums part of that array (With tracks etc)
+-for artist already in there: searches to see if that artist is already there, if so returns that and adds album to that part
+-if album already there, 
+
+artists: artists in library
+
+albums: albums in artists
+
+tracks: ng-repeat tracks in albums
+
+
+
+
+add:
+-needs to check if data is in the library
+-
 
 
 
@@ -194,6 +226,344 @@ IF LOGGED IN: can add to playlist, can add to library,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-remove duplicates in library
+-make the library respond to double-clicking
+-hilight things that are clicked
+
+
+
+
+
+
+-loop through library, set var isIn to false and if that variable is set to that, then add
+in scope.albums... find the name of the 
+
+
+
+
+
+
+
+
+
+				for (i=0; i<libraryData.library.length; i++){
+					for (j=0; j<libraryData.library[i].albums.length; j++){
+						albums.push(libraryData.library[i].albums[j])
+					}
+				}
+				console.log(albums)
+				return albums
+
+
+
+	  	}
+
+
+
+	  	scope.getCurrentTracks = function(tracks){
+	  		currentTracks = []
+
+	  		//iterate over tracks
+	  		for (i=0; i<scope.tracks.length; i++){
+	  			var trackTitle = scope.tracks[i].trackTitle
+	  			var trackNumber = scope.tracks[i].trackNumber
+	  			var albumTitle = undefined
+	  			var artistTitle = undefined
+	  			//find album
+	  			for (j=0; j<scope.albums.length; j++){
+	  				var albumCheck = scope.albums[j]
+	  				for (k=0; k<scope.albumCheck.tracks.length; k++){
+	  					if (scope.albumCheck.tracks[k].trackTitle===trackTitle){
+	  						//track's album title:
+	  						var albumTitle = albumCheck.albumTitle
+	  						console.log(albumTitle)
+	  					}
+	  				}
+	  			}
+	  			for (j=0; j<scope.artists.length){
+	  				var artistCheck = scope.artists[j]
+	  				for (k=0; k<scope.artistCheck.albums.length; k++){
+	  					if (scope.artistCheck.albums[k]===albumTitle){
+	  						var artistTitle = artistCheck.artist
+	  						console.log(artistTitle)
+	  					}
+	  				}
+	  			}
+	  			currentTracks.push({trackTitle:trackTitle, albumTitle:albumTitle, artistTitle:artistTitle, trackNumber:trackNumber})
+	  			
+	  		}
+	  		return currentTracks
+	  	}
 
 
 

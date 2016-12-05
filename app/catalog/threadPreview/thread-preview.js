@@ -1,6 +1,6 @@
 angular.module('threadPreview',[])
 
-.directive('mxThreadPreview', ['threadData', 'imageBotData', 'replyCounter', 'replyData', function(threadData, imageBotData, replyCounter, replyData){
+.directive('mxThreadPreview', ['threadData', 'replyCounter', 'replyData', function(threadData, replyCounter, replyData){
 	return {
 		restrict: 'E',
 	  templateUrl: 'catalog/threadPreview/thread-preview.html',
@@ -9,10 +9,7 @@ angular.module('threadPreview',[])
 	  link: function(scope, element, attrs){
 	  	scope.threads = threadData.threads;
 	  	scope.replies = replyData.replies
-	  	scope.generateImage = imageBotData.generateImage
 
-	  	//gets imageID from init variable to pass around
-	  	imageBotData.imageID = scope.image;
 
 	  	//to get reply count number...
 	  	scope.replies.$loaded(function(){

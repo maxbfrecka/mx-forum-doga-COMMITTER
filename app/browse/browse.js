@@ -7,7 +7,7 @@ angular.module('browse',[])
 	  transclude: true,
 	  controllerAs: "bc",
 	  link: function(scope, element, attrs){
-	  	//simply start play method from nothing
+	  	//simply start play method from nothing, will need modifying
 	  	nowPlayingList.queuedAlbum = browseTestData.artists[0].albums[0]
 			nowPlayingList.queuedArtist = browseTestData.artists[0]
 			nowPlayingList.queuedTrack = browseTestData.artists[0].albums[0].tracks[0]
@@ -35,7 +35,7 @@ angular.module('browse',[])
 		{
 			artist: 'Banzaei',
 			albums: [
-				{
+					{
 					albumTitle: 'Sharp Metal',
 					albumCover: 'https://f4.bcbits.com/img/a1946274968_10.jpg',
 					tracks: [

@@ -30,9 +30,11 @@
 
 <div class="musicPlayerContainer">
 
-		<div class="musicPlayerArtIconContainer">
-			<img class="musicPlayerAlbumArtIcon" src="{{albumCover}}">
-		</div>
+		<a class="musicPlayerCoverLink" href="#/music/{{artistName | removeSpacesThenLowercase}}/{{albumTitle | removeSpacesThenLowercase}}">
+			<div class="musicPlayerArtIconContainer">
+				<img class="musicPlayerAlbumArtIcon" src="{{albumCover}}">
+			</div>
+		</a>
 
 		<div class="musicPlayerTimeContainer">
 
@@ -51,11 +53,13 @@
 			
 		</div>
 
-		<div class="nowPlayingData">
-			<span>{{trackTitle}}</span>
-			<span>{{albumTitle}}</span>
-			<span>{{artistName}}</span>
-		</div>
+		<a class="musicPlayerDataLink" href="#/music/{{artistName | removeSpacesThenLowercase}}/{{albumTitle | removeSpacesThenLowercase}}">
+			<div class="nowPlayingData">
+				<span>{{trackTitle}}</span>
+				<span>{{albumTitle}}</span>
+				<span>{{artistName}}</span>
+			</div>
+		</a>
 
 </div>
 

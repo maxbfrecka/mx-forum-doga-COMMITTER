@@ -543,8 +543,20 @@ span#time{
     background-color:red;
 }
 
-
-
+a.musicPlayerDataLink {
+    color:black;
+}
+a.musicPlayerDataLink:hover {
+    color:black;
+    text-decoration:none
+}
+a.musicPlayerCoverLink {
+    color:black;
+}
+a.musicPlayerCoverLink:hover {
+    color:black;
+    text-decoration:none
+}
 
 
 
